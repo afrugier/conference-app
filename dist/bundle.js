@@ -65,47 +65,74 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-alert('Conférence App démarré !');
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_talkService__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__layout_index__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__layout_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__layout_index__);
+// alert('Conférence App démarré !');
 
-let speakers = __webpack_require__(1);
-console.log(speakers.findAllSpeakers());
+
+const TalkService = new TalkService();
+
+
+const layout = new layout();
+
+TalkService.findAllSpeakers()
+    .then(speakers => {
+        speakers.map(speaker => speaker.firstname).forEach(speaker => {
+            console.log(speak);
+        });
+    })
+    .catch(error => console.log(error));
+
+layout.render();
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 const req = new XMLHttpRequest();
 req.open('GET', 'http://localhost:3000/speakers', true);
-req.onreadystatechange = (aEvt) => {
-    if (req.readyState == 4) {
-        if (req.status == 200)
-            req.responseText;
-        else
-            throw "Erreur pendant le chargement de la page";
-    }
-};
-
-req.send(null);
-
-
 
 class TalkService {
 
-    findAllSpeakers() {
-        return new Promise((resolve, refect) => {
-            let presentateurs = this.req.get();
-            if (presentateurs) {
-                resolve(presentateurs.lastname+" "+presentateurs.firstname);
-            }
-            else {
-                refect('pas de présentateur');
-            }
-        });
+    constructor() {
     }
 
+    findAllSpeakers() {
+        return new Promise((resolve, reject) => {
+            req.onreadystatechange = (aEvt) => {
+                if (req.readyState == 4) {
+                    if (req.status == 200)
+                        resolve(JSON.parse(req.responseText));
+                    else
+                        reject("Erreur pendant le chargement de la page");
+                }
+            }
+            req.send(null);
+        });
+    }
 }
+/* unused harmony export default */
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+
+// import layout from './layout.html';
+
+// class layout{
+//     render(){
+//         // document.body.appendChild(layout);
+//         document.querySelector("body").innerHTML=layout;
+//     }
+// }
 
 /***/ })
 /******/ ]);

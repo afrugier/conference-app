@@ -1,12 +1,12 @@
 // alert('Conférence App démarré !');
 
 import TalkService from './common/talkService';
-let TalkService = new TalkService();
+import Layout from './layout/index';
+import SpeakerList from './speakers/list/index';
 
-TalkService.findAllSpeakers()
-    .then(speakers => {
-        speakers.map(speaker => speaker.firstname).forEach(speaker => {
-            console.log(speak);
-        });
-    })
-    .catch(error => console.log(error));
+const talkService = new TalkService();
+const layout = new Layout();
+const speakerList = new SpeakerList(talkService);
+
+layout.render();
+speakerList.render("main-view");

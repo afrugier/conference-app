@@ -1,6 +1,3 @@
-const req = new XMLHttpRequest();
-req.open('GET', 'http://localhost:3000/speakers', true);
-
 export default class TalkService {
 
     constructor() {
@@ -8,6 +5,8 @@ export default class TalkService {
 
     findAllSpeakers() {
         return new Promise((resolve, reject) => {
+            const req = new XMLHttpRequest();
+            req.open('GET', 'http://localhost:3000/speakers', true);
             req.onreadystatechange = (aEvt) => {
                 if (req.readyState == 4) {
                     if (req.status == 200)

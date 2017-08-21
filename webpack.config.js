@@ -6,11 +6,17 @@ module.exports = {
     // il est possible de définir plusieurs points d'entrée
     entry: './src/index.js',
     output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js"
+        path: path.resolve(__dirname, "dist"),
+        filename: "bundle.js"
     },
     plugins: [
         new HtmlWebpackPlugin(),
         // new UglifyJSPlugin()
-    ]
+    ],
+    module: {
+        rules: [{
+            test: /\.html$/,
+            loader: 'html-loader'
+        }]
+    }
 }
