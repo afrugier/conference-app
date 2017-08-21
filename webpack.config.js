@@ -1,6 +1,6 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+var webpack = require("webpack");
 module.exports = {
     // définition des points d'entrée
     // il est possible de définir plusieurs points d'entrée
@@ -11,12 +11,27 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin(),
-        // new UglifyJSPlugin()
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery",
+            Popper: 'popper.js'
+        })
     ],
     module: {
-        rules: [{
-            test: /\.html$/,
-            loader: 'html-loader'
-        }]
+
+        rules: [
+            {
+                test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                use: 'file-loader?name=fonts/[name].[ext]'
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader',
+            },
+            {
+                test: /\.css$/,
+                loader: ['style-loader', 'css-loader']
+            }]
     }
 }

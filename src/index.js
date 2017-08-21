@@ -1,12 +1,14 @@
 // alert('Conférence App démarré !');
 
-import TalkService from './common/talkService';
 import Layout from './layout/index';
+import TalkService from './common/talkService';
 import SpeakerList from './speakers/list/index';
 import SessionList from './sessions/list/index';
-
-const talkService = new TalkService();
+import "bootstrap/dist/css/bootstrap.css";
+import 'bootstrap';
+  
 const layout = new Layout();
+const talkService = new TalkService();
 const speakerList = new SpeakerList(talkService);
 const sessionList = new SessionList(talkService);
 
